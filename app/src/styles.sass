@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* annotation to include default tailwind classes during build (may look different than you're used to but thats because
+  tailwind recently upgraded to v4 in late January 2025) */
+@import 'tailwindcss';
+
+// below is an example of how you can use tailwind objects to customize tailwind config instead of using tailwind.config.js (deprecated)
+// @theme {
+//   colors: {
+//     primary: #1d4ed8;
+//     secondary: #9333ea;
+//   }
+// }
+
+// I believe its a similar system for daisyUI but I have never used it so I will look into it more
+@import 'daisyui';
