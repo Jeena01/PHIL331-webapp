@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Had to change this to a scss file to allow for the use of daisyUI */
+
+/* annotation to include default tailwind classes during build (may look different than you're used to but thats because
+  tailwind recently upgraded to v4 in late January 2025). */
+@import 'tailwindcss';
+
+/* daisyui current stable version incompatible. The beta version of the new stable release is the dependency being used instead. */
+@plugin 'daisyui';
