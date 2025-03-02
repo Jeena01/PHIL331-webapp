@@ -49,10 +49,10 @@
             @for (answer of question.questionAnswers; track answer; let i =
             $index) {
             <div
-              class="flex items-center justify-between p-4 bg-base-200 rounded-lg"
+              class="flex flex-col md:flex-row md:items-center justify-between p-4 bg-base-200 rounded-lg"
             >
-              <span class="flex-1">{{ answer }}</span>
-              <div class="flex items-center gap-4">
+              <span class="flex-1 mb-2 md:mb-0">{{ answer }}</span>
+              <div class="flex items-center gap-4 self-end md:self-auto">
                 <span class="text-sm opacity-70">
                   {{ question.answerCounts[i] }} responses
                 </span>
