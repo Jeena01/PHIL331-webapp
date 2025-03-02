@@ -1,0 +1,102 @@
+<div class="min-h-screen bg-base-200 py-8">
+  <div class="container mx-auto px-4">
+    <!-- Loading State -->
+    @if (loading) {
+    <div class="flex justify-center items-center min-h-[200px]">
+      <span class="loading loading-spinner loading-lg"></span>
+    </div>
+    }
+
+    <!-- Already Completed Survey Message -->
+    @if (!loading && hasCompletedSurvey) {
+    <div class="max-w-md mx-auto">
+      <div class="card bg-base-100 shadow-xl">
+        <div class="card-body text-center">
+          <h2 class="card-title text-2xl justify-center mb-4">
+            Survey Already Completed
+          </h2>
+          <p class="mb-6">
+            It looks like you've already completed this survey with the email
+            address:
+            <span class="font-semibold">{{ userEmail }}</span>
+          </p>
+          <div class="card-actions justify-center">
+            <button class="btn btn-primary" (click)="goHome()">
+              Return to Home
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+
+    <!-- Survey Questions -->
+    @if (!loading && !hasCompletedSurvey) {
+    <div class="text-center mb-12">
+      <h1 class="text-5xl font-bold mb-4">AI in Art Survey</h1>
+      <p class="text-xl text-base-content/70">
+        Please answer each question based on your ethical perspective
+      </p>
+    </div>
+
+    <div class="space-y-8 max-w-4xl mx-auto">
+      @for (question of questions; track question.id) {
+      <div class="card bg-base-100 shadow-xl">
+        <figure class="px-4 pt-4">
+          <img
+            [src]="question.imageUrl"
+            [alt]="question.questionText"
+            class="rounded-xl max-h-[300px] w-full object-cover"
+          />
+        </figure>
+        <div class="card-body">
+          <h2 class="card-title">{{ question.questionText }}</h2>
+
+          <div class="space-y-3 mt-4">
+            @for (answer of question.questionAnswers; track answer) {
+            <button
+              class="btn btn-outline w-full answer-button"
+              [class.selected-answer]="question.selectedAnswer === answer"
+              (click)="selectAnswer(question.id, answer)"
+            >
+              <div class="answer-content">
+                <span class="answer-text">{{ answer }}</span>
+                @if (question.selectedAnswer === answer) {
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="2.5"
+                  class="check-icon stroke-success"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M4.5 12.75l6 6 9-13.5"
+                  />
+                </svg>
+                }
+              </div>
+            </button>
+            }
+          </div>
+        </div>
+      </div>
+      }
+
+      <!-- Submit Button -->
+      <div class="flex justify-center mt-12">
+        <button
+          class="btn btn-primary btn-lg"
+          [disabled]="!areAllQuestionsAnswered() || isSubmitting"
+          (click)="submitSurvey()"
+        >
+          @if (isSubmitting) {
+          <span class="loading loading-spinner loading-md"></span>
+          } Submit Survey
+        </button>
+      </div>
+    </div>
+    }
+  </div>
+</div>

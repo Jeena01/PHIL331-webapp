@@ -1,0 +1,53 @@
+<div class="min-h-screen bg-base-200 flex items-center justify-center p-4">
+  <div class="w-full max-w-md">
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body p-4 md:p-8">
+        <h2 class="card-title text-2xl mb-2">Before we begin...</h2>
+
+        <p class="text-base-content/70 mb-6">
+          Please provide your email address. This helps us ensure the integrity
+          of our research by making sure each person only completes the survey
+          once.
+        </p>
+
+        <div class="form-control w-full">
+          <label class="label pt-0">
+            <span class="label-text">Email address</span>
+          </label>
+          <input
+            type="email"
+            [(ngModel)]="email"
+            (input)="validateEmail()"
+            placeholder="your.email@example.com"
+            class="input input-bordered w-full"
+            [class.input-error]="email && !isValidEmail"
+          />
+
+          @if (email && !isValidEmail) {
+          <label class="label">
+            <span class="label-text-alt text-error"
+              >Please enter a valid email address</span
+            >
+          </label>
+          } @if (errorMessage) {
+          <label class="label">
+            <span class="label-text-alt text-error">{{ errorMessage }}</span>
+          </label>
+          }
+        </div>
+
+        <div class="card-actions justify-end mt-6">
+          <button
+            class="btn btn-primary"
+            [disabled]="!isValidEmail || isChecking"
+            (click)="checkAndProceed()"
+          >
+            @if (isChecking) {
+            <span class="loading loading-spinner loading-sm"></span>
+            } Continue
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
