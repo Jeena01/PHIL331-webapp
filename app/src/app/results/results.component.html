@@ -1,0 +1,82 @@
+<div class="min-h-screen bg-base-200 py-8">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-12">
+      <h1 class="text-5xl font-bold mb-4">Survey Results</h1>
+      <p class="text-xl text-base-content/70">
+        See how others responded to the AI in Art survey
+      </p>
+    </div>
+
+    <!-- Loading State -->
+    @if (loading) {
+    <div class="flex justify-center items-center min-h-[200px]">
+      <span class="loading loading-spinner loading-lg"></span>
+    </div>
+    }
+
+    <!-- Error State -->
+    @if (error) {
+    <div class="max-w-md mx-auto">
+      <div class="alert alert-error">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="stroke-current shrink-0 h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+        <span>{{ error }}</span>
+      </div>
+    </div>
+    }
+
+    <!-- Results -->
+    @if (!loading && !error) {
+    <div class="space-y-12 max-w-4xl mx-auto">
+      @for (question of questions; track question.id) {
+      <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title mb-2">{{ question.questionTitle }}</h2>
+          <p class="text-base-content/70 mb-6">{{ question.questionText }}</p>
+
+          <!-- Answer Statistics -->
+          <div class="grid gap-4">
+            @for (answer of question.questionAnswers; track answer; let i =
+            $index) {
+            <div
+              class="flex flex-col md:flex-row md:items-center justify-between p-4 bg-base-200 rounded-lg"
+            >
+              <span class="flex-1 mb-2 md:mb-0">{{ answer }}</span>
+              <div class="flex items-center gap-4 self-end md:self-auto">
+                <span class="text-sm opacity-70">
+                  {{ question.answerCounts[i] }} responses
+                </span>
+                <div class="badge badge-primary">
+                  {{
+                    getResponsePercentage(
+                      question.answerCounts[i],
+                      question.totalResponses
+                    )
+                  }}
+                </div>
+              </div>
+            </div>
+            }
+          </div>
+
+          <div class="text-sm text-center mt-4 text-base-content/70">
+            Total Responses: {{ question.totalResponses }}
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+    }
+  </div>
+</div>

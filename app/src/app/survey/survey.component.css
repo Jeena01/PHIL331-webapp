@@ -1,0 +1,53 @@
+.answer-button {
+  min-height: 3.5rem !important;
+  height: auto !important;
+  padding: 1rem !important;
+  white-space: normal !important;
+  text-align: left !important;
+}
+
+.answer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.answer-text {
+  flex: 1;
+  line-height: 1.5;
+}
+
+.check-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+}
+
+.selected-answer {
+  border-color: #1db954 !important; /* success color */
+  border-width: 4px !important;
+  background-color: rgba(
+    29,
+    185,
+    84,
+    0.1
+  ) !important; /* success color with 10% opacity */
+  box-shadow: 0 0 0 2px rgba(29, 185, 84, 0.2); /* success color with 20% opacity */
+  transform: scale(1.01);
+  transition: all 0.2s ease-in-out;
+}
+
+.selected-answer:hover {
+  background-color: rgba(
+    29,
+    185,
+    84,
+    0.2
+  ) !important; /* success color with 20% opacity */
+}
+
+.btn-outline {
+  transition: all 0.2s ease-in-out;
+}

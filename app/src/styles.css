@@ -4,7 +4,22 @@
 
 /* annotation to include default tailwind classes during build (may look different than you're used to but thats because
   tailwind recently upgraded to v4 in late January 2025). */
-@import 'tailwindcss';
+@import "tailwindcss";
 
 /* daisyui current stable version incompatible. The beta version of the new stable release is the dependency being used instead. */
 @plugin 'daisyui';
+
+/* Add these to your existing styles */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.menu-horizontal > li > a {
+  @apply rounded-lg;
+}
+
+.menu-horizontal > li > a:hover {
+  @apply bg-base-200;
+}
