@@ -42,7 +42,8 @@
       @for (question of questions; track question.id) {
       <div class="card bg-base-100 shadow-xl">
         <div class="card-body">
-          <h2 class="card-title mb-6">{{ question.questionText }}</h2>
+          <h2 class="card-title mb-2">{{ question.questionTitle }}</h2>
+          <p class="text-base-content/70 mb-6">{{ question.questionText }}</p>
 
           <!-- Answer Statistics -->
           <div class="grid gap-4">

@@ -25,17 +25,10 @@
           <div class="border border-base-300 rounded-lg p-3 md:p-4">
             <div class="flex flex-col md:flex-row md:items-start gap-4">
               <div class="flex-1">
-                <h3 class="font-medium mb-2">{{ question.questionText }}</h3>
-                <div class="text-sm text-base-content/70 mb-2">
-                  <span class="font-medium">Image:</span>
-                  <a
-                    [href]="question.imageUrl"
-                    target="_blank"
-                    class="link link-primary"
-                  >
-                    View
-                  </a>
-                </div>
+                <h3 class="font-bold mb-2">{{ question.questionTitle }}</h3>
+                <p class="text-base-content/70 mb-3">
+                  {{ question.questionText }}
+                </p>
                 <div class="space-y-1">
                   @for (answer of question.questionAnswers; track answer) {
                   <div
@@ -121,31 +114,30 @@
           class="space-y-4"
         >
           <div class="form-control">
-            <label class="label mr-2">
-              <span class="label-text">Question Text</span>
+            <label class="label">
+              <span class="label-text">Question Title</span>
             </label>
             <input
               type="text"
-              [(ngModel)]="newQuestion.questionText"
-              name="questionText"
-              placeholder="Enter your question"
+              [(ngModel)]="newQuestion.questionTitle"
+              name="questionTitle"
+              placeholder="Enter the question title"
               class="input input-bordered"
               [disabled]="loading"
             />
           </div>
 
-          <div class="form-control mb-8">
-            <label class="label mr-2">
-              <span class="label-text">Image URL</span>
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Question Text</span>
             </label>
-            <input
-              type="url"
-              [(ngModel)]="newQuestion.imageUrl"
-              name="imageUrl"
-              placeholder="Enter image URL"
-              class="input input-bordered"
+            <textarea
+              [(ngModel)]="newQuestion.questionText"
+              name="questionText"
+              placeholder="Enter the question description"
+              class="textarea textarea-bordered h-24"
               [disabled]="loading"
-            />
+            ></textarea>
           </div>
 
           <div class="form-control">

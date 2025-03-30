@@ -15,7 +15,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 interface Question {
   id: string;
-  imageUrl: string;
+  questionTitle: string;
   questionText: string;
   questionAnswers: string[];
   selectedAnswer?: string;

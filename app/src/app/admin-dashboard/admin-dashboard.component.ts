@@ -14,14 +14,14 @@ import { AuthService } from '../services/auth.service';
 
 interface Question {
   id: string;
+  questionTitle: string;
   questionText: string;
-  imageUrl: string;
   questionAnswers: string[];
 }
 
 interface NewQuestion {
+  questionTitle: string;
   questionText: string;
-  imageUrl: string;
   questionAnswers: string[];
 }
 
@@ -34,9 +34,9 @@ interface NewQuestion {
 })
 export class AdminDashboardComponent implements OnInit {
   newQuestion: NewQuestion = {
+    questionTitle: '',
     questionText: '',
-    imageUrl: '',
-    questionAnswers: [''], // Start with one empty answer
+    questionAnswers: [''],
   };
 
   error: string | null = null;
@@ -99,12 +99,12 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   validateQuestion(): boolean {
-    if (!this.newQuestion.questionText.trim()) {
-      this.error = 'Question text is required';
+    if (!this.newQuestion.questionTitle.trim()) {
+      this.error = 'Question title is required';
       return false;
     }
-    if (!this.newQuestion.imageUrl.trim()) {
-      this.error = 'Image URL is required';
+    if (!this.newQuestion.questionText.trim()) {
+      this.error = 'Question text is required';
       return false;
     }
     if (this.newQuestion.questionAnswers.length === 0) {
@@ -131,16 +131,16 @@ export class AdminDashboardComponent implements OnInit {
     try {
       const questionsCollection = collection(db, 'Questions');
       await addDoc(questionsCollection, {
+        questionTitle: this.newQuestion.questionTitle.trim(),
         questionText: this.newQuestion.questionText.trim(),
-        imageUrl: this.newQuestion.imageUrl.trim(),
         questionAnswers: this.newQuestion.questionAnswers.map((a) => a.trim()),
       });
 
       this.success = 'Question created successfully';
       // Reset form
       this.newQuestion = {
+        questionTitle: '',
         questionText: '',
-        imageUrl: '',
         questionAnswers: [''],
       };
     } catch (error) {

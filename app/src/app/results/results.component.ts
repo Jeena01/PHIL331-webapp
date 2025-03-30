@@ -5,6 +5,7 @@ import { db } from '../../../firebaseConfig';
 
 interface Question {
   id: string;
+  questionTitle: string;
   questionText: string;
   questionAnswers: string[];
   answerCounts: number[];

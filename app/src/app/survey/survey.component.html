@@ -32,25 +32,57 @@
 
     <!-- Survey Questions -->
     @if (!loading && !hasCompletedSurvey) {
-    <div class="text-center mb-12">
+    <div class="text-center mb-8">
       <h1 class="text-5xl font-bold mb-4">AI in Art Survey</h1>
-      <p class="text-xl text-base-content/70">
+      <p class="text-xl text-base-content/70 mb-8">
         Please answer each question based on your ethical perspective
       </p>
+
+      <div class="card bg-base-100 shadow-xl max-w-4xl mx-auto mb-12">
+        <div class="card-body prose max-w-none">
+          <h3 class="font-bold text-xl mb-4">Key Factors to Consider:</h3>
+
+          <ul class="list-none pl-0">
+            <li class="mb-3">
+              <strong>Licensing:</strong> Was the training data open source or
+              licensed such that derivative works are allowed?
+            </li>
+            <li class="mb-3">
+              <strong>Art Style Similarity:</strong> Does the model's generated
+              art closely resemble the style of a particular artist?
+            </li>
+            <li class="mb-3">
+              <strong>Content Similarity:</strong> Does the model's generated
+              art closely resemble existing paintings in terms of content?
+            </li>
+            <li class="mb-3">
+              <strong>Creativity/Regurgitation:</strong> Does the model emulate
+              creativity and reasoning, or does it merely recombine elements
+              from the input data?
+            </li>
+          </ul>
+
+          <div class="divider"></div>
+
+          <p class="text-base-content/80">
+            For all of the questions below, the scenario is as follows: An AI
+            has been trained to generate visual art (paintings, drawings, etc.)
+            using millions of existing pieces of artwork. This AI is pay-to-use.
+            The question is whether the developers of the AI or the creators of
+            the art should receive the profit from its use.
+          </p>
+        </div>
+      </div>
     </div>
 
     <div class="space-y-8 max-w-4xl mx-auto">
       @for (question of questions; track question.id) {
       <div class="card bg-base-100 shadow-xl">
-        <figure class="px-4 pt-4">
-          <img
-            [src]="question.imageUrl"
-            [alt]="question.questionText"
-            class="rounded-xl max-h-[300px] w-full object-cover"
-          />
-        </figure>
         <div class="card-body">
-          <h2 class="card-title">{{ question.questionText }}</h2>
+          <h2 class="card-title text-xl font-bold mb-2">
+            {{ question.questionTitle }}
+          </h2>
+          <p class="text-base-content/80 mb-6">{{ question.questionText }}</p>
 
           <div class="space-y-3 mt-4">
             @for (answer of question.questionAnswers; track answer) {
